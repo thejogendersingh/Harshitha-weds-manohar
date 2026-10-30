@@ -416,3 +416,9 @@ body.is-revealed .hero-anim-btn {
 
 
 
+
+
+/* KANNADA FONT UTILITY */
+.font-kannada {
+  font-family: 'Noto Sans Kannada', 'Noto Serif Kannada', 'Plus Jakarta Sans', sans-serif;
+}

@@ -5,11 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (window.lucide) {
     lucide.createIcons();
   }
+
   // 1. ENVELOPE OPENING & ENTRY ANIMATION
   const doorOverlay = document.getElementById('door-overlay');
   const doorSealBtn = document.getElementById('door-seal-btn');
-
-  // Trigger staggered animations on load are handled by CSS animations now.
 
   function openRoyalDoor() {
     if (!doorOverlay || doorOverlay.classList.contains('is-opened')) return;
@@ -20,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Trigger hero content micro-motion reveal
     document.body.classList.add('is-revealed');
 
-    // Ensure background video plays (bypasses potential mobile restrictions on pre-interaction autoplay)
+    // Ensure background video plays
     const heroVideo = document.querySelector('.hero-bg-video');
     if (heroVideo) {
       heroVideo.muted = true;
@@ -46,8 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (doorOverlay) doorOverlay.addEventListener('click', openRoyalDoor);
   if (doorSealBtn) doorSealBtn.addEventListener('click', openRoyalDoor);
 
-  // 2. LIVE COUNTDOWN TIMER
-  const destination = new Date('2026-11-23T11:00:00').getTime();
+  // 2. LIVE COUNTDOWN TIMER (Starts on Haldi: 09-Nov-2026 19:00 IST)
+  const destination = new Date('2026-11-09T19:00:00').getTime();
 
   function updateCountdown() {
     const now = new Date().getTime();
@@ -74,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
-  // 3. ROMANTIC METALLIC GOLD SCRATCH CARD COVER (EXACT REFERENCE MATCH)
+  // 3. ROMANTIC METALLIC GOLD SCRATCH CARD COVER
   const scratchCanvas = document.getElementById('scratch-canvas');
   const scratchWrapper = document.getElementById('scratch-card-wrapper');
 
@@ -98,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.globalCompositeOperation = 'source-over';
       ctx.clearRect(0, 0, w, h);
 
-      // Iridescent Rose-Gold Diagonal Metallic Foil Gradient (Dynamic Tactile Feel)
+      // Iridescent Rose-Gold Metallic Foil Gradient
       const cardGrad = ctx.createLinearGradient(0, 0, w, h);
       cardGrad.addColorStop(0, '#F5D6C6');
       cardGrad.addColorStop(0.22, '#FFF0E5');
@@ -161,7 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const pixels = imageData.data;
       let clearPixels = 0;
 
-      // Sample every 16th pixel for performance
       for (let i = 3; i < pixels.length; i += 64) {
         if (pixels[i] === 0) {
           clearPixels++;
@@ -179,7 +177,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function triggerPartyPopperExplosion() {
       if (!window.confetti) return;
 
-      // Left Party Popper Cannon
       confetti({
         particleCount: 85,
         angle: 60,
@@ -188,7 +185,6 @@ document.addEventListener('DOMContentLoaded', () => {
         colors: ['#C5A059', '#F3D0D5', '#E8A598', '#8A3E4E', '#FFF5F6'],
       });
 
-      // Right Party Popper Cannon
       confetti({
         particleCount: 85,
         angle: 120,
@@ -197,7 +193,6 @@ document.addEventListener('DOMContentLoaded', () => {
         colors: ['#C5A059', '#F3D0D5', '#E8A598', '#8A3E4E', '#FFF5F6'],
       });
 
-      // Center Big Party Popper Burst
       setTimeout(() => {
         confetti({
           particleCount: 140,
@@ -213,10 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (isRevealed) return;
       isRevealed = true;
 
-      // Fade out scratch overlay smoothly
       scratchCanvas.style.opacity = '0';
-
-      // PARTY POPPER FLOWER EXPLOSION!
       triggerPartyPopperExplosion();
 
       setTimeout(() => {
@@ -224,7 +216,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 700);
     }
 
-    // Event Listeners for Touch & Mouse
     window.addEventListener('resize', resizeScratchCanvas);
     setTimeout(resizeScratchCanvas, 100);
     if (document.fonts) {
@@ -266,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
         rotation: Math.random() * Math.PI * 2,
         rotationSpeed: (Math.random() - 0.5) * 0.02,
         color: colors[Math.floor(Math.random() * colors.length)],
-        opacity: Math.random() * 0.35 + 0.2, // Gentle soft low opacity
+        opacity: Math.random() * 0.35 + 0.2,
       });
     }
 
@@ -303,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderPetals();
   }
 
-  // 5. OFFICIAL SURILI AKHIYON WALE INSTRUMENTAL AUDIO ENGINE (100% VOLUME)
+  // 5. WEDDING MUSIC ENGINE
   let bgAudio = null;
   let audioCtx = null;
   let isPlaying = false;
@@ -316,19 +307,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!bgAudio) {
         bgAudio = new Audio();
         bgAudio.loop = true;
-        bgAudio.volume = 1.0; // 100% Full Volume
-
-        // Try primary assets/wedding_tune.mp3 for 100% Netlify & Mobile compatibility
+        bgAudio.volume = 1.0;
         bgAudio.src = 'assets/wedding_tune.mp3';
         
         bgAudio.onerror = () => {
-          if (bgAudio) {
-            bgAudio.src = 'assets/wedding_tune.mp4';
-            bgAudio.play().then(() => {
-              isPlaying = true;
-              updateAudioButtonUI(true);
-            }).catch(startWebAudioFallback);
-          }
+          startWebAudioFallback();
         };
       }
 
@@ -336,13 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isPlaying = true;
         updateAudioButtonUI(true);
       }).catch(() => {
-        if (bgAudio) {
-          bgAudio.src = 'assets/wedding_tune.mp4';
-          bgAudio.play().then(() => {
-            isPlaying = true;
-            updateAudioButtonUI(true);
-          }).catch(startWebAudioFallback);
-        }
+        startWebAudioFallback();
       });
     } catch (e) {
       startWebAudioFallback();
@@ -351,52 +328,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function startWebAudioFallback() {
     try {
-      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-      audioCtx = new AudioContextClass();
+      if (audioCtx) return;
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
       const masterGain = audioCtx.createGain();
-      masterGain.gain.setValueAtTime(1.0, audioCtx.currentTime); // 100% Full Volume
+      masterGain.gain.setValueAtTime(0.08, audioCtx.currentTime);
       masterGain.connect(audioCtx.destination);
 
-      // Tanpura Drone Harmonies
-      [110.00, 164.81, 220.00].forEach((freq) => {
+      const tanpuraFreqs = [110.00, 164.81, 220.00];
+      tanpuraFreqs.forEach(freq => {
         const osc = audioCtx.createOscillator();
-        const droneGain = audioCtx.createGain();
-        const filter = audioCtx.createBiquadFilter();
-
+        const gain = audioCtx.createGain();
         osc.type = 'sawtooth';
         osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
 
+        const filter = audioCtx.createBiquadFilter();
         filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(450, audioCtx.currentTime);
-
-        droneGain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        filter.frequency.setValueAtTime(400, audioCtx.currentTime);
 
         osc.connect(filter);
-        filter.connect(droneGain);
-        droneGain.connect(masterGain);
+        filter.connect(gain);
+        gain.connect(masterGain);
         osc.start();
       });
 
-      // Shehnai & Flute Melody Loop
+      let noteIdx = 0;
       function playNextNote() {
         if (!audioCtx) return;
-
         const osc = audioCtx.createOscillator();
         const noteGain = audioCtx.createGain();
         const filter = audioCtx.createBiquadFilter();
 
-        const isFlute = Math.random() > 0.45;
+        const isFlute = Math.random() > 0.4;
         osc.type = isFlute ? 'sine' : 'triangle';
-        const freq = ragaNotes[Math.floor(Math.random() * ragaNotes.length)];
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(isFlute ? 1200 : 800, audioCtx.currentTime);
+
+        const freq = ragaNotes[noteIdx % ragaNotes.length];
+        noteIdx = (noteIdx + 1 + Math.floor(Math.random() * 3)) % ragaNotes.length;
         osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
 
-        filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(isFlute ? 1500 : 2600, audioCtx.currentTime);
-
-        const duration = isFlute ? 2.5 : 1.4;
-        noteGain.gain.setValueAtTime(0);
-        noteGain.gain.linearRampToValueAtTime(0.35, audioCtx.currentTime + 0.15);
+        const duration = isFlute ? 2.5 : 1.5;
+        noteGain.gain.setValueAtTime(0, audioCtx.currentTime);
+        noteGain.gain.linearRampToValueAtTime(0.08, audioCtx.currentTime + 0.3);
         noteGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
 
         osc.connect(filter);
@@ -419,7 +394,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateAudioButtonUI(playing) {
     const btn = document.getElementById('audio-toggle-btn');
-    const label = document.getElementById('audio-label');
     if (btn) {
       btn.innerHTML = playing
         ? '<i data-lucide="volume-2" style="width:14px;height:14px;color:#C5A059;flex-shrink:0;"></i><span id="audio-label" style="font-size:9px;font-weight:700;letter-spacing:0.18em;color:#C5A059;text-transform:uppercase;white-space:nowrap;">MUSIC</span>'
@@ -452,24 +426,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 6. RSVP FORM SUBMIT WITH CONFETTI
-  const rsvpForm = document.getElementById('rsvp-form');
-  if (rsvpForm) {
-    rsvpForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (window.confetti) {
-        confetti({
-          particleCount: 90,
-          spread: 70,
-          origin: { y: 0.6 },
-          colors: ['#C5A059', '#8A3E4E', '#F3D0D5', '#FFF5F6'],
-        });
-      }
-      alert('Thank you! Your Royal RSVP has been received with joy.');
-    });
-  }
-
-  // 8. SCROLL REVEAL MOTION ANIMATION FOR ALL SECTIONS & CARDS
+  // 6. SCROLL REVEAL MOTION ANIMATION
   const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -40px 0px' };
   const scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -483,181 +440,126 @@ document.addEventListener('DOMContentLoaded', () => {
     scrollObserver.observe(el);
   });
 
-  // 9. INDIAN MULTI-LANGUAGE TRANSLATION ENGINE (ENG, HIN, PUN)
+  // 7. MULTI-LANGUAGE TRANSLATION ENGINE (ENG, KAN, HIN, TAM, TEL)
   const translations = {
     eng: {
-      mantra: "|| Shree Ganeshay Namah ||",
+      mantra1: "|| Shree Male Mahadeshwara Krupe || • || Shree Umathooru Urkateshwari Krupe ||",
+      mantra2: "🙏 ॥ ಶ್ರೀ ಮಲೆ ಮಹದೇಶ್ವರ ಕೃಪೆ ॥ • ॥ ಶ್ರೀ ಉಮ್ಮತ್ತೂರು ಊರುಕಾಟೇಶ್ವರಿ ಕೃಪೆ ॥ 🙏",
       subtitle: "The Wedding Celebration of",
-      groom: "Shagun",
-      bride: "Chakshu",
+      subtitleKan: "💐 ಶುಭ ವಿವಾಹ ಆಮಂತ್ರಣ ಪತ್ರಿಕೆ 💐",
+      groom: "Manohar M",
+      bride: "Harshitha MK",
       weds: "weds",
-      date: "Monday, Nov 23 - Thursday, Nov 26, 2026",
-      venue: "Village Diyada, Tehsil Dehra, Kangra (H.P.)",
-      countdownTitle: "THE CELEBRATION BEGINS",
+      coupleKan: "ಚಿ.ರಾ. ಮನೋಹರ್ ಎಂ. & ಚಿ. ಸೌ. ಹರ್ಷಿತಾ ಎಂ.ಕೆ.",
+      tagline: "❤️ Two hearts, one soul, one beautiful journey forever. ❤️",
+      taglineKan: "❤️ ಎರಡು ಹೃದಯಗಳು, ಒಂದೇ ಆತ್ಮ, ಪ್ರೀತಿ ಮತ್ತು ಅನುರಾಗದಿಂದ ಕೂಡಿದ ಎಂದೆಂದಿಗೂ ಸುಂದರವಾದ ಪಯಣ. ❤️",
+      countdownBadge: "THE CELEBRATION BEGINS • ಶುಭಾರಂಭ",
+      countdownLoc: "Mysuru • Channapatna • Karnataka",
       days: "DAYS",
       hours: "HOURS",
       mins: "MINUTES",
       secs: "SECONDS",
+      eventsBadge: "THE ITINERARY • ವಿವಾಹ ಮಹೋತ್ಸವದ ಕಾರ್ಯಕ್ರಮಗಳು",
       eventsTitle: "Sacred Ceremonies",
       hostsTitle: "With Blessings",
-      hostsSub: "WITH THE BLESSINGS OF OUR ELDERS",
-      hostsWelcomed: "Warmly Welcomed By",
-      hostsFamilies: "Thakur Family",
-      hostsGroomSide: "Groom's Family",
-      hostsBrideSide: "Bride's Family",
-      hostsBottomNote: '"Kindly join us to celebrate the auspicious wedding ceremony of our children."',
+      hostsSub: "WITH THE BLESSINGS OF OUR ELDERS • ಹಿರಿಯರ ಆಶೀರ್ವಾದ",
       venueTitle: "Where We Celebrate",
-      directionsBtn: "Get Directions",
-      footerText: "WITH LOVE & BLESSINGS"
+      footerText: "WITH LOVE & BLESSINGS • ಪ್ರೀತಿ ಮತ್ತು ಆಶೀರ್ವಾದಗಳೊಂದಿಗೆ"
+    },
+    kan: {
+      mantra1: "|| ಶ್ರೀ ಮಲೆ ಮಹದೇಶ್ವರ ಕೃಪೆ || • || ಶ್ರೀ ಉಮ್ಮತ್ತೂರು ಊರುಕಾಟೇಶ್ವರಿ ಕೃಪೆ ||",
+      mantra2: "🙏 ॥ ಶ್ರೀ ಮಲೆ ಮಹದೇಶ್ವರ ಕೃಪೆ ॥ • ॥ ಶ್ರೀ ಉಮ್ಮತ್ತೂರು ಊರುಕಾಟೇಶ್ವರಿ ಕೃಪೆ ॥ 🙏",
+      subtitle: "ಶುಭ ವಿವಾಹ ಆಮಂತ್ರಣ ಪತ್ರಿಕೆ",
+      subtitleKan: "ಹಿರಿಯರ ಆಶೀರ್ವಾದ ಹಾಗೂ ದೇವರ ಕೃಪೆಯೊಂದಿಗೆ",
+      groom: "ಮನೋಹರ್ ಎಂ.",
+      bride: "ಹರ್ಷಿತಾ ಎಂ.ಕೆ.",
+      weds: "ಮತ್ತು",
+      coupleKan: "ಚಿ.ರಾ. ಮನೋಹರ್ ಎಂ. & ಚಿ. ಸೌ. ಹರ್ಷಿತಾ ಎಂ.ಕೆ.",
+      tagline: "❤️ ಎರಡು ಹೃದಯಗಳು, ಒಂದೇ ಆತ್ಮ, ಎಂದೆಂದಿಗೂ ಸುಂದರವಾದ ಪಯಣ. ❤️",
+      taglineKan: "ಪ್ರೀತಿ ಮತ್ತು ಅನುರಾಗದಿಂದ ಕೂಡಿದ ಸುಂದರವಾದ ಪಯಣ.",
+      countdownBadge: "ಶುಭಾರಂಭ",
+      countdownLoc: "ಮೈಸೂರು • ಚನ್ನಪಟ್ಟಣ • ಕರ್ನಾಟಕ",
+      days: "ದಿನಗಳು",
+      hours: "ಗಂಟೆಗಳು",
+      mins: "ನಿಮಿಷಗಳು",
+      secs: "ಸೆಕೆಂಡುಗಳು",
+      eventsBadge: "ವಿವಾಹ ಮಹೋತ್ಸವದ ಕಾರ್ಯಕ್ರಮಗಳು",
+      eventsTitle: "ಶುಭ ಕಾರ್ಯಕ್ರಮಗಳು",
+      hostsTitle: "ಶುಭ ಆಶೀರ್ವಾದ",
+      hostsSub: "ಹಿರಿಯರ ಆಶೀರ್ವಾದದೊಂದಿಗೆ",
+      venueTitle: "ಸಮಾರಂಭದ ಸ್ಥಳಗಳು",
+      footerText: "ಪ್ರೀತಿ ಮತ್ತು ಆಶೀರ್ವಾದಗಳೊಂದಿಗೆ"
     },
     hin: {
-      mantra: "|| श्री गणेशाय नमः ||",
+      mantra1: "|| श्री मले महादेश्वर कृपे || • || श्री उम्मत्तूरु ऊरुकाटेश्वरी कृपे ||",
+      mantra2: "🙏 ॥ श्री मले महादेश्वर कृपे ॥ • ॥ श्री उम्मत्तूरु ऊरुकाटेश्वरी कृपे ॥ 🙏",
       subtitle: "शुभ विवाह समारोह",
-      groom: "शगुन",
-      bride: "चक्षु",
+      subtitleKan: "💐 ಶುಭ ವಿವಾಹ ಆಮಂತ್ರಣ ಪತ್ರಿಕೆ 💐",
+      groom: "मनोहर एम.",
+      bride: "हर्षिता एम.के.",
       weds: "संग",
-      date: "23 से 26 नवम्बर 2026",
-      venue: "गांव दियाड़ा, देहरा, जिला कांगड़ा (हि०प्र०)",
-      countdownTitle: "शुभ विवाह तिथि",
+      coupleKan: "ಚಿ.ರಾ. ಮನೋಹರ್ ಎಂ. & ಚಿ. ಸೌ. ಹರ್ಷಿತಾ ಎಂ.ಕೆ.",
+      tagline: "❤️ Two hearts, one soul, one beautiful journey forever. ❤️",
+      taglineKan: "❤️ दो दिल, एक आत्मा, सदैव का पावन संगम ❤️",
+      countdownBadge: "शुभ आरंभ",
+      countdownLoc: "मैसूर • चन्नापटना • कर्नाटक",
       days: "दिन",
       hours: "घंटे",
       mins: "मिनट",
       secs: "सेकंड",
-      eventsTitle: "वैवाहिक कार्यक्रम",
+      eventsBadge: "वैवाहिक कार्यक्रम",
+      eventsTitle: "पावन अनुष्ठान",
       hostsTitle: "शुभ आशीर्वाद",
       hostsSub: "पूज्य बुजुर्गों के आशीर्वाद से",
-      hostsWelcomed: "स्वागतकर्ता",
-      hostsFamilies: "समस्त ठाकुर परिवार",
-      hostsGroomSide: "वर पक्ष",
-      hostsBrideSide: "वधू पक्ष",
-      hostsBottomNote: '"हमारे बच्चों के शुभ विवाह के पावन अवसर पर आपका सादर निमंत्रण है।"',
       venueTitle: "उत्सव स्थल",
-      directionsBtn: "दिशा-निर्देश",
       footerText: "स्नेह एवं आदर सहित"
     },
-    pun: {
-      mantra: "|| ੴ ਸ੍ਰੀ ਗਣੇਸ਼ਾਏ ਨਮਹ ||",
-      subtitle: "ਦੇ ਪਵਿੱਤਰ ਵਿਆਹ ਸਮਾਗਮ",
-      groom: "ਆਰਵ",
-      bride: "ਅਨਿਕਾ",
-      weds: "ਸੰਗ",
-      date: "ਸ਼ਨੀਵਾਰ, 28 ਨਵੰਬਰ 2026",
-      venue: "ਦ ਓਬਰਾਏ ਉਦੈਵਿਲਾਸ, ਉਦੈਪੁਰ ਵਿਖੇ",
-      countdownTitle: "ਸ਼ੁਭ ਵਿਆਹ ਦੀ ਤਾਰੀਖ",
-      days: "ਦਿਨ",
-      hours: "ਘੰਟੇ",
-      mins: "ਮਿੰਟ",
-      secs: "ਸਕਿੰਟ",
-      eventsTitle: "ਪ੍ਰੋਗਰਾਮ ਸੂਚੀ",
-      hostsTitle: "ਸ਼ੁਭ ਅਸੀਸਾਂ",
-      hostsSub: "ਵੱਡਿਆਂ ਦੇ ਆਸ਼ੀਰਵਾਦ ਨਾਲ",
-      hostsWelcomed: "ਜੀ ਆਇਆਂ ਨੂੰ",
-      hostsFamilies: "ਅਰੋੜਾ ਪਰਿਵਾਰ",
-      hostsGroomSide: "ਲੜਕੇ ਵਾਲੇ",
-      hostsBrideSide: "ਲੜਕੀ ਵਾਲੇ",
-      hostsBottomNote: '"ਸਾਡੇ ਬੱਚਿਆਂ ਦੇ ਅਨੰਦ ਕਾਰਜ ਦੇ ਸ਼ੁਭ ਅਵਸਰ \'ਤੇ ਤੁਹਾਡੀ ਹਾਜ਼ਰੀ ਦੀ ਮੰਗ ਕਰਦੇ ਹਾਂ।"',
-      venueTitle: "ਵਿਆਹ ਦਾ ਸਥਾਨ",
-      directionsBtn: "ਦਿਸ਼า-ਨਿਰਦੇਸ਼",
-      footerText: "ਪਿਆਰ ਅਤੇ ਸਤਿਕਾਰ ਸਹਿਤ"
-    },
-    mar: {
-      mantra: "|| श्री गणेशाय नमः ||",
-      subtitle: "यांच्या शुभ विवाह सोहळ्यात",
-      groom: "आरव",
-      bride: "अनिका",
-      weds: "विवाह करतात",
-      date: "शनिवार, २८ नोव्हेंबर २०२६",
-      venue: "द ओबेरॉय उदयविलास, उदयपूर येथे",
-      countdownTitle: "शुभ विवाह तिथी",
-      days: "दिवस",
-      hours: "तास",
-      mins: "मिनिटे",
-      secs: "सेकंद",
-      eventsTitle: "कार्यक्रम सूची",
-      hostsTitle: "आशीर्वादासह",
-      hostsSub: "वडिलधाऱ्यांच्या आशीर्वादाने",
-      hostsWelcomed: "सादर आमंत्रण",
-      hostsFamilies: "अरोरा कुटुंब",
-      hostsGroomSide: "वर पक्ष",
-      hostsBrideSide: "वधू पक्ष",
-      hostsBottomNote: '"आमच्या मुलांच्या शुभ विवाह सोहळ्यात आपल्या उपस्थितीसाठी नम्र विनंती आहे."',
-      venueTitle: "उत्सव स्थळ",
-      directionsBtn: "दिशानिर्देश",
-      footerText: "प्रेम व शुभेच्छांसह"
-    },
-    guj: {
-      mantra: "|| શ્રી ગણેશાય નમઃ ||",
-      subtitle: "ના પવિત્ર વિવાહ સમારોહ",
-      groom: "આરવ",
-      bride: "અનિકા",
-      weds: "સાથે",
-      date: "શનિવાર, ૨૮ નવેમ્બર ૨૦૨૬",
-      venue: "ધ ઓબેરોઈ ઉદય વિલાસ, ઉદયપુર ખાતે",
-      countdownTitle: "શુભ વિવાહ તિથિ",
-      days: "દિવસ",
-      hours: "કલાક",
-      mins: "મિનિટ",
-      secs: "સેકન્ડ",
-      eventsTitle: "કાર્યક્રમ સૂચિ",
-      hostsTitle: "આશીર્વાદ સહિત",
-      hostsSub: "વડીલોના આશીર્વાદ સાથે",
-      hostsWelcomed: "સ્વાગત છે",
-      hostsFamilies: "અરોરા પરિવાર",
-      hostsGroomSide: "વર પક્ષ",
-      hostsBrideSide: "વધૂ પક્ષ",
-      hostsBottomNote: '"અમારા સંતાનના આનંદ કારજ પ્રસંગે આપની ઉપસ્થિતિ ઈચ્છીએ છીએ."',
-      venueTitle: "ઉત્સવ સ્થળ",
-      directionsBtn: "દિશા-નિર્દેશ",
-      footerText: "પ્રેમ અને શ્રદ્ધા સહ"
-    },
     tam: {
-      mantra: "|| ஸ்ரீ கணேசாய நமஹ ||",
-      subtitle: "திருமண விழாவில்",
-      groom: "ஆரவ்",
-      bride: "அனிகா",
+      mantra1: "|| ஸ்ரீ மலே மகாதேஸ்வரா கிருபை ||",
+      mantra2: "🙏 ॥ ஸ்ரீ மலே மகாதேஸ்வரா கிருபை ॥ 🙏",
+      subtitle: "திருமண அழைப்பிதழ்",
+      subtitleKan: "💐 ಶುಭ ವಿವಾಹ ಆಮಂತ್ರಣ ಪತ್ರಿಕೆ 💐",
+      groom: "மனோகர் எம்.",
+      bride: "ஹர்ஷிதா எம்.கே.",
       weds: "மணக்கிறார்",
-      date: "சனிக்கிழமை, நவம்பர் 28, 2026",
-      venue: "த ஓபரா உதய்விலாஸ், உதய்பூர்",
-      countdownTitle: "திருமண நாள்",
+      coupleKan: "மனோகர் & ஹர்ஷிதா",
+      tagline: "❤️ Two hearts, one soul, one beautiful journey forever. ❤️",
+      taglineKan: "❤️ இரு இதயம், ஒரு ஆன்மா, இனிய பயணம் ❤️",
+      countdownBadge: "திருமண நாள்",
+      countdownLoc: "மைசூர் • சன்னபட்னா",
       days: "நாட்கள்",
       hours: "மணி",
       mins: "நிமிடம்",
       secs: "வினாடி",
-      eventsTitle: "நிகழ்ச்சிகள்",
+      eventsBadge: "நிகழ்ச்சிகள்",
+      eventsTitle: "திருமண விழா",
       hostsTitle: "ஆசியோடு",
       hostsSub: "பெரியோர்களின் ஆசியோடு",
-      hostsWelcomed: "அன்போடு அழைக்கிறோம்",
-      hostsFamilies: "அரோரா குடும்பம்",
-      hostsGroomSide: "மணமகன் தரப்பு",
-      hostsBrideSide: "மணமகள் தரப்பு",
-      hostsBottomNote: '"எங்கள் பிள்ளைகளின் திருமண விழாவில் கலந்துகொள்ள அன்போடு அழைக்கிறோம்."',
       venueTitle: "கொண்டாட்ட இடம்",
-      directionsBtn: "வழி காட்டு",
       footerText: "அன்பும் ஆசியும்"
     },
     tel: {
-      mantra: "|| శ్రీ గణేశాయ నమః ||",
-      subtitle: "వివాహ వేడుకకు",
-      groom: "ఆరవ్",
-      bride: "అనిక",
+      mantra1: "|| శ్రీ మలే మహాదేశ్వర కృప ||",
+      mantra2: "🙏 ॥ శ్రీ మలే మహాదేశ్వర కృప ॥ 🙏",
+      subtitle: "వివాహ ఆహ్వాన పత్రిక",
+      subtitleKan: "💐 ಶುಭ ವಿವಾಹ ಆಮಂತ್ರಣ ಪತ್ರಿಕೆ 💐",
+      groom: "మనోహర్ ఎం.",
+      bride: "హర్షిత ఎం.కె.",
       weds: "వివాహమాడుతున్నారు",
-      date: "శనివారం, నవంబర్ 28, 2026",
-      venue: "ది ఒబెరాయ్ ఉదయ్‌విలాస్, ఉదయపూర్",
-      countdownTitle: "శుభ వివాహ తేదీ",
+      coupleKan: "మనోహర్ & హర్షిత",
+      tagline: "❤️ Two hearts, one soul, one beautiful journey forever. ❤️",
+      taglineKan: "❤️ రెండు హృదయాలు, ఒకే ఆత్మ, అందమైన ప్రయాణం ❤️",
+      countdownBadge: "శుభారంభం",
+      countdownLoc: "మైసూర్ • చన్నపట్న",
       days: "రోజులు",
       hours: "గంటలు",
       mins: "నిమిషాలు",
       secs: "సెకన్లు",
-      eventsTitle: "కార్యక్రమాలు",
-      hostsTitle: "ఆశీర్వాదంతో",
+      eventsBadge: "కార్యక్రమాలు",
+      eventsTitle: "శుభ వేడుకలు",
+      hostsTitle: "ఆశీర్వాదాలతో",
       hostsSub: "పెద్దల ఆశీర్వాదంతో",
-      hostsWelcomed: "ఆత్మీయంగా ఆహ్వానిస్తున్నాం",
-      hostsFamilies: "అరోరా కుటుంబం",
-      hostsGroomSide: "వరుడి వైపు",
-      hostsBrideSide: "వధువు వైపు",
-      hostsBottomNote: '"మా పిల్లల వివాహ వేడుకలో మీ సమక్షం కోసం ఆత్మీయంగా వేడుకుంటున్నాం."',
       venueTitle: "వేడుక స్థలం",
-      directionsBtn: "దిశలు పొందండి",
       footerText: "ప్రేమతో మరియు ఆశీర్వాదంతో"
     }
   };
@@ -691,7 +593,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const langOptions = document.querySelectorAll('.lang-opt');
     langOptions.forEach((opt) => {
-      // Hover effect via JS since buttons use inline styles
       opt.addEventListener('mouseenter', () => {
         if (opt.getAttribute('data-lang') !== currentActiveLang) {
           opt.style.color = '#C5A059';
@@ -720,17 +621,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!lang) return;
     currentActiveLang = lang;
 
-    // Update the lang-label span only (preserves the icon)
     const langLabel = document.getElementById('lang-label');
     if (langLabel) {
       const labels = {
-        eng: 'ENG', hin: 'हिन', pun: 'ਪੰਜ',
-        mar: 'मरा', guj: 'ગુજ', tam: 'தமி', tel: 'తెలు'
+        eng: 'ENG', kan: 'ಕನ್ನಡ', hin: 'हिन', tam: 'தமி', tel: 'తెలు'
       };
       langLabel.textContent = labels[lang] || 'ENG';
     }
 
-    // Dynamic replacement loop for elements with data-trans attribute
     const transElements = document.querySelectorAll('[data-trans]');
     transElements.forEach((el) => {
       const key = el.getAttribute('data-trans');
@@ -739,7 +637,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Highlight active pill via inline style (buttons use inline CSS)
     document.querySelectorAll('.lang-opt').forEach(btn => {
       const isActive = btn.getAttribute('data-lang') === lang;
       if (isActive) {
@@ -756,7 +653,6 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('selectedLanguage', lang);
   }
 
-  // Load language preference from local cache, default to ENG
   const savedLang = localStorage.getItem('selectedLanguage') || 'eng';
   setLanguage(savedLang);
 });
@@ -767,169 +663,53 @@ function scrollToId(id) {
   if (el) el.scrollIntoView({ behavior: 'smooth' });
 }
 
-// ----------------------------------------------------
-// FULLSCREEN GALLERY LIGHTBOX MODAL
-// ----------------------------------------------------
-function openLightbox(src, caption) {
-  const modal = document.getElementById('gallery-lightbox');
-  const img = document.getElementById('lightbox-img');
-  const cap = document.getElementById('lightbox-caption');
-  if (!modal || !img) return;
-  img.src = src;
-  if (cap) cap.textContent = caption || '';
-  modal.classList.remove('hidden');
-  modal.classList.add('flex');
-}
 
-function closeLightbox() {
-  const modal = document.getElementById('gallery-lightbox');
-  if (!modal) return;
-  modal.classList.remove('flex');
-  modal.classList.add('hidden');
-}
-
-window.openLightbox = openLightbox;
-window.closeLightbox = closeLightbox;
-
-// ----------------------------------------------------
-// 5-SECOND AUTOMATIC GALLERY CAROUSEL LOGIC
-// ----------------------------------------------------
-const gallerySlides = [
-  { 
-    img: 'https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=1200', 
-    thumb: 'https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=300',
-    tag: 'Pre-Wedding', 
-    title: 'Bridal Elegance', 
-    desc: 'Timeless beauty in traditional attire' 
+// Interactive Venue Switcher
+const venueData = {
+  wedding: {
+    title: 'Sri Thimmamma Dasegowda Kalyana Mantapa, BM Road, Kengal, Channapatna',
+    mapSrc: 'https://maps.google.com/maps?q=Sri+Thimmamma+Dasegowda+Kalyana+Mantapa+Kengal+Channapatna&t=&z=15&ie=UTF8&iwloc=&output=embed',
+    dirHref: 'https://www.google.com/maps/dir/?api=1&destination=Sri+Thimmamma+Dasegowda+Kalyana+Mantapa+Kengal+Channapatna',
+    btnText: 'Get Directions to Wedding Venue'
   },
-  { 
-    img: 'https://images.pexels.com/photos/1024967/pexels-photo-1024967.jpeg?auto=compress&cs=tinysrgb&w=1200', 
-    thumb: 'https://images.pexels.com/photos/1024967/pexels-photo-1024967.jpeg?auto=compress&cs=tinysrgb&w=300',
-    tag: 'Ceremony', 
-    title: 'Maiyan & Haldi Rituals', 
-    desc: 'Vibrant yellow turmeric colors & blessings' 
+  reception: {
+    title: 'Lalitha Mahal Palace, Lalitha Mahal Nagar, Mysuru, Karnataka',
+    mapSrc: 'https://maps.google.com/maps?q=Lalitha+Mahal+Palace+Mysuru&t=&z=15&ie=UTF8&iwloc=&output=embed',
+    dirHref: 'https://www.google.com/maps/dir/?api=1&destination=Lalitha+Mahal+Palace+Mysuru',
+    btnText: 'Get Directions to Reception Venue'
   },
-  { 
-    img: 'https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg?auto=compress&cs=tinysrgb&w=1200', 
-    thumb: 'https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg?auto=compress&cs=tinysrgb&w=300',
-    tag: 'Celebration', 
-    title: 'Mehndi Celebration', 
-    desc: 'Beautiful henna art & joyful celebrations' 
-  },
-  { 
-    img: 'https://images.pexels.com/photos/1043902/pexels-photo-1043902.jpeg?auto=compress&cs=tinysrgb&w=1200', 
-    thumb: 'https://images.pexels.com/photos/1043902/pexels-photo-1043902.jpeg?auto=compress&cs=tinysrgb&w=300',
-    tag: 'Ritual', 
-    title: 'Baraat Swagat & Milni', 
-    desc: 'Grand royal welcome & traditional milni' 
-  },
-  { 
-    img: 'https://images.pexels.com/photos/3014856/pexels-photo-3014856.jpeg?auto=compress&cs=tinysrgb&w=1200', 
-    thumb: 'https://images.pexels.com/photos/3014856/pexels-photo-3014856.jpeg?auto=compress&cs=tinysrgb&w=300',
-    tag: 'Sacred Karaj', 
-    title: 'Sacred Anand Karaj', 
-    desc: 'Holy ceremony of eternal union' 
-  },
-  { 
-    img: 'https://images.pexels.com/photos/1045541/pexels-photo-1045541.jpeg?auto=compress&cs=tinysrgb&w=1200', 
-    thumb: 'https://images.pexels.com/photos/1045541/pexels-photo-1045541.jpeg?auto=compress&cs=tinysrgb&w=300',
-    tag: 'Blessings', 
-    title: 'Eternal Promises', 
-    desc: 'Two souls united together forever' 
+  haldi: {
+    title: '#427 Sudha Mahal, 17th Cross, Alanahalli Layout, Lalitha Mahal Nagara, Mysuru',
+    mapSrc: 'https://maps.google.com/maps?q=Alanahalli+Layout+Lalitha+Mahal+Nagara+Mysuru&t=&z=15&ie=UTF8&iwloc=&output=embed',
+    dirHref: 'https://www.google.com/maps/dir/?api=1&destination=Alanahalli+Layout+Lalitha+Mahal+Nagara+Mysuru',
+    btnText: 'Get Directions to Haldi Venue'
   }
-];
+};
 
-let currentSlideIdx = 0;
-let carouselTimer = null;
+function switchVenue(type) {
+  const data = venueData[type];
+  if (!data) return;
 
-function updateGalleryCarouselUI() {
-  const featuredImg = document.getElementById('carousel-featured-img');
-  const tagEl = document.getElementById('carousel-category-tag');
-  const titleEl = document.getElementById('carousel-title');
-  const descEl = document.getElementById('carousel-desc');
-  const dotsContainer = document.getElementById('carousel-dots-container');
+  const iframe = document.getElementById('venue-map-iframe');
+  const sub = document.getElementById('venue-title-sub');
+  const dirLink = document.getElementById('venue-direction-link');
+  const dirText = document.getElementById('venue-direction-text');
 
-  if (!featuredImg || !gallerySlides[currentSlideIdx]) return;
+  if (iframe) iframe.src = data.mapSrc;
+  if (sub) sub.textContent = data.title;
+  if (dirLink) dirLink.href = data.dirHref;
+  if (dirText) dirText.textContent = data.btnText;
 
-  const current = gallerySlides[currentSlideIdx];
-
-  featuredImg.style.opacity = '0.3';
-  setTimeout(() => {
-    featuredImg.src = current.img;
-    if (tagEl) tagEl.textContent = current.tag;
-    if (titleEl) titleEl.textContent = current.title;
-    if (descEl) descEl.textContent = current.desc;
-    featuredImg.style.opacity = '1';
-  }, 200);
-
-  // Update dots
-  if (dotsContainer) {
-    let dotsHTML = '';
-    for (let i = 0; i < gallerySlides.length; i++) {
-      const cls = i === currentSlideIdx ? 'bg-[#C5A059] w-5' : 'bg-white/40';
-      dotsHTML += `<span onclick="setGallerySlide(${i})" class="w-2 h-2 rounded-full cursor-pointer transition-all ${cls}"></span>`;
-    }
-    dotsContainer.innerHTML = dotsHTML;
-  }
-
-  // Update thumbnails
-  const thumbs = document.querySelectorAll('.carousel-thumb');
-  thumbs.forEach((thumb, idx) => {
-    const thumbImg = thumb.querySelector('img');
-    if (thumbImg && gallerySlides[idx]) {
-      thumbImg.src = gallerySlides[idx].thumb;
-    }
-    if (idx === currentSlideIdx) {
-      thumb.classList.add('border-2', 'border-[#C5A059]', 'opacity-100', 'scale-105');
-      thumb.classList.remove('opacity-60');
-    } else {
-      thumb.classList.remove('border-2', 'opacity-100', 'scale-105');
-      thumb.classList.add('opacity-60');
+  ['wedding', 'reception', 'haldi'].forEach(t => {
+    const btn = document.getElementById(`tab-${t}`);
+    if (btn) {
+      if (t === type) {
+        btn.className = 'venue-tab-btn active px-4 py-2 rounded-full font-sans text-[10px] uppercase tracking-[0.16em] font-bold transition-all duration-300 bg-royal-gold text-white shadow-sm border border-royal-gold';
+      } else {
+        btn.className = 'venue-tab-btn px-4 py-2 rounded-full font-sans text-[10px] uppercase tracking-[0.16em] font-bold transition-all duration-300 bg-white text-charcoal-muted border border-gray-200 hover:border-royal-gold';
+      }
     }
   });
 }
 
-function nextGallerySlide() {
-  currentSlideIdx = (currentSlideIdx + 1) % gallerySlides.length;
-  updateGalleryCarouselUI();
-}
-
-function prevGallerySlide() {
-  currentSlideIdx = (currentSlideIdx - 1 + gallerySlides.length) % gallerySlides.length;
-  updateGalleryCarouselUI();
-}
-
-function setGallerySlide(index) {
-  if (index >= 0 && index < gallerySlides.length) {
-    currentSlideIdx = index;
-    updateGalleryCarouselUI();
-    resetCarouselTimer();
-  }
-}
-
-function openCurrentCarouselLightbox() {
-  const current = gallerySlides[currentSlideIdx];
-  if (current && window.openLightbox) {
-    window.openLightbox(current.img, current.title);
-  }
-}
-
-function resetCarouselTimer() {
-  if (carouselTimer) clearInterval(carouselTimer);
-  carouselTimer = setInterval(() => {
-    nextGallerySlide();
-  }, 5000);
-}
-
-// Expose slide functions globally
-window.nextGallerySlide = nextGallerySlide;
-window.prevGallerySlide = prevGallerySlide;
-window.setGallerySlide = setGallerySlide;
-window.openCurrentCarouselLightbox = openCurrentCarouselLightbox;
-
-// Initialize slide rotation when script starts
-setTimeout(() => {
-  updateGalleryCarouselUI();
-  resetCarouselTimer();
-}, 200);
-
+window.switchVenue = switchVenue;
