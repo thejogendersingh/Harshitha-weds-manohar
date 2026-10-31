@@ -337,12 +337,12 @@ body.is-revealed .hero-anim-btn {
 @media (max-width: 768px) {
   .hero-section {
     padding-top: max(0.5rem, env(safe-area-inset-top)) !important;
-    padding-bottom: 38vh !important; /* Lifts content into open blue sky above mandap dome */
+    padding-bottom: 32vh !important; /* Lifts content into open blue sky above mandap dome */
     justify-content: center !important;
   }
 
   .hero-container {
-    transform: translateY(-75px) !important; /* Close to Ganesh Ji, far above dome */
+    transform: translateY(-50px) !important; /* Close to Ganesh Ji, far above dome */
     margin: auto 0 !important;
     padding-left: 0.75rem !important;
     padding-right: 0.75rem !important;
@@ -368,7 +368,7 @@ body.is-revealed .hero-anim-btn {
   }
 
   .hero-container {
-    transform: translateY(-68px) !important;
+    transform: translateY(-46px) !important;
   }
 
   .hero-title-main {
