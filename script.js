@@ -45,8 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (doorOverlay) doorOverlay.addEventListener('click', openRoyalDoor);
   if (doorSealBtn) doorSealBtn.addEventListener('click', openRoyalDoor);
 
-  // 2. LIVE COUNTDOWN TIMER (Starts on Haldi: 09-Nov-2026 19:00 IST)
-  const destination = new Date('2026-11-09T19:00:00').getTime();
+  // 2. LIVE COUNTDOWN TIMER (Starts on Reception: 10-Nov-2026 19:00 IST)
+  const destination = new Date('2026-11-10T19:00:00').getTime();
 
   function updateCountdown() {
     const now = new Date().getTime();
@@ -713,3 +713,26 @@ function switchVenue(type) {
 }
 
 window.switchVenue = switchVenue;
+
+
+// Lightbox Modal functions for Gallery
+function openLightbox(src, caption) {
+  const modal = document.getElementById('gallery-lightbox');
+  const img = document.getElementById('lightbox-img');
+  const cap = document.getElementById('lightbox-caption');
+  if (!modal || !img) return;
+  img.src = src;
+  if (cap) cap.textContent = caption || '';
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+}
+
+function closeLightbox() {
+  const modal = document.getElementById('gallery-lightbox');
+  if (!modal) return;
+  modal.classList.remove('flex');
+  modal.classList.add('hidden');
+}
+
+window.openLightbox = openLightbox;
+window.closeLightbox = closeLightbox;
