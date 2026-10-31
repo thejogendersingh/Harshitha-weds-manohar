@@ -333,28 +333,28 @@ body.is-revealed .hero-anim-btn {
   justify-content: center;
 }
 
-/* Mobile & Tablet Sky Alignment */
+/* Mobile & Tablet Sky Alignment - Fail-safe Natural Sky Flow */
 @media (max-width: 768px) {
   .hero-section {
-    padding-top: max(0.5rem, env(safe-area-inset-top)) !important;
-    padding-bottom: 32vh !important; /* Lifts content into open blue sky above mandap dome */
-    justify-content: center !important;
+    padding-top: max(4.25rem, env(safe-area-inset-top) + 2rem) !important; /* Safely below garland & notch */
+    padding-bottom: 0 !important;
+    justify-content: flex-start !important;
   }
 
   .hero-container {
-    transform: translateY(-50px) !important; /* Close to Ganesh Ji, far above dome */
-    margin: auto 0 !important;
+    transform: none !important; /* Never push out of top */
+    margin: 0 auto !important;
     padding-left: 0.75rem !important;
     padding-right: 0.75rem !important;
   }
 
   .hero-title-main {
-    font-size: 2.85rem !important;
+    font-size: 2.75rem !important;
     line-height: 1.05 !important;
   }
 
   .hero-title-weds {
-    font-size: 2.2rem !important;
+    font-size: 2rem !important;
     margin-top: -0.25rem !important;
     margin-bottom: -0.25rem !important;
   }
@@ -363,34 +363,35 @@ body.is-revealed .hero-anim-btn {
 /* Short Mobile Screens (< 680px viewport height) */
 @media (max-height: 680px) and (max-width: 768px) {
   .hero-section {
-    padding-top: max(0.25rem, env(safe-area-inset-top)) !important;
-    padding-bottom: 34vh !important;
+    padding-top: max(3.5rem, env(safe-area-inset-top) + 1.25rem) !important;
+    padding-bottom: 0 !important;
+    justify-content: flex-start !important;
   }
 
   .hero-container {
-    transform: translateY(-46px) !important;
+    transform: none !important;
   }
 
   .hero-title-main {
-    font-size: 2.5rem !important;
+    font-size: 2.35rem !important;
   }
 
   .hero-title-weds {
-    font-size: 1.9rem !important;
+    font-size: 1.75rem !important;
   }
 }
 
 /* Desktop & Laptop Fine-Tuning (> 768px width) */
 @media (min-width: 769px) {
   .hero-section {
-    padding-top: max(1.5rem, env(safe-area-inset-top)) !important;
-    padding-bottom: 32vh !important;
-    justify-content: center !important;
+    padding-top: max(4.5rem, env(safe-area-inset-top) + 2rem) !important;
+    padding-bottom: 0 !important;
+    justify-content: flex-start !important;
   }
 
   .hero-container {
-    transform: translateY(-50px) !important;
-    margin: auto 0 !important;
+    transform: none !important;
+    margin: 0 auto !important;
   }
 }
 
