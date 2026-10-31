@@ -61,7 +61,7 @@
     }
   </script>
 
-  <link rel="stylesheet" href="style.css?v=9.0" />
+  <link rel="stylesheet" href="style.css?v=10.0" />
 </head>
 <body class="bg-ivory-100 text-charcoal font-sans antialiased overflow-x-hidden">
 
@@ -122,7 +122,7 @@
       -webkit-backdrop-filter: blur(24px) saturate(160%);
       border: 1px solid rgba(197,160,89,0.22);
       border-radius: 999px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.05) inset;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.45);
       cursor: pointer;
       transition: all 0.3s ease;
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -188,8 +188,8 @@
     </button>
   </div>
 
-  <!-- HERO SECTION (CLEAN, NO OVERLAPPING WITH PALACE DOME) -->
-  <section class="hero-section relative flex flex-col items-center justify-start sm:justify-center pt-8 pb-12 sm:pt-14 sm:pb-16 px-4 sm:px-8 overflow-hidden bg-ivory-100">
+  <!-- HERO SECTION (CLEAN, LIFTED HIGHER IN SKY, INDIVIDUAL FULL MANTRA LINES) -->
+  <section class="hero-section relative flex flex-col items-center justify-start sm:justify-center pt-6 pb-12 sm:pt-10 sm:pb-16 px-4 sm:px-8 overflow-hidden bg-ivory-100">
     <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden hero-bg-anim">
       <video id="hero-bg-video" class="hero-bg-video w-full h-full object-cover object-center" autoplay loop muted playsinline preload="auto">
         <source src="assets/hero-bg-video.mp4" type="video/mp4" />
@@ -201,21 +201,27 @@
       <div class="absolute inset-0 bg-white/15"></div>
     </div>
 
-    <div class="hero-container flex flex-col items-center justify-center max-w-2xl w-full mx-auto z-10 px-2 sm:px-4 text-center mt-1 sm:mt-0">
+    <div class="hero-container flex flex-col items-center justify-center max-w-2xl w-full mx-auto z-10 px-2 sm:px-4 text-center mt-0">
       
-      <!-- Ganesh Ji (Clean, No Card Background) -->
-      <div class="relative mx-auto mb-1.5 sm:mb-2 hero-anim-ganesha flex items-center justify-center">
-        <img src="assets/ganeshji.png" alt="Lord Ganesha" class="w-24 sm:w-28 md:w-32 h-auto object-contain filter drop-shadow-md hover:scale-105 transition-transform duration-300" />
+      <!-- Ganesh Ji (Clean & Large, No Card Background) -->
+      <div class="relative mx-auto mb-1 hero-anim-ganesha flex items-center justify-center">
+        <img src="assets/ganeshji.png" alt="Lord Ganesha" class="w-20 sm:w-28 md:w-32 h-auto object-contain filter drop-shadow-md hover:scale-105 transition-transform duration-300" />
       </div>
 
-      <!-- Deity Mantras (English & Kannada Pair) -->
-      <div class="space-y-0.5 mb-1.5 hero-anim-mantra">
-        <div class="text-[10px] sm:text-[12px] font-serif font-semibold text-royal-gold tracking-[0.16em] uppercase">
-          || Shree Kalabhairaveshwara Krupe || • || Shree Honnaaruthamma Krupe ||
-        </div>
-        <div class="text-[11px] sm:text-[13px] font-kannada font-semibold text-royal-green tracking-wide">
-          🙏 ಶ್ರೀ ಕಾಲಭೈರವೇಶ್ವರಸ್ವಾಮಿ ಪ್ರಸನ್ನ • ॥ ಶ್ರೀ ಹೊನ್ನಾರುತಮ್ಮ ಕೃಪೆ ॥ 🙏
-        </div>
+      <!-- Deity Mantras (Each sentence complete on its own individual line, no wrapping) -->
+      <div class="space-y-0.5 mb-1.5 hero-anim-mantra text-center flex flex-col items-center">
+        <p class="text-[10px] sm:text-xs md:text-[13px] font-serif font-semibold text-royal-gold tracking-[0.14em] uppercase whitespace-nowrap">
+          || Shree Kalabhairaveshwara Krupe ||
+        </p>
+        <p class="text-[10px] sm:text-xs md:text-[13px] font-serif font-semibold text-royal-gold tracking-[0.14em] uppercase whitespace-nowrap">
+          🙏 Shree Honnaaruthamma Krupe 🙏
+        </p>
+        <p class="font-kannada text-[11px] sm:text-xs md:text-[13px] font-semibold text-royal-green tracking-wide pt-0.5 whitespace-nowrap">
+          🙏 ಶ್ರೀ ಕಾಲಭೈರವೇಶ್ವರಸ್ವಾಮಿ ಪ್ರಸನ್ನ
+        </p>
+        <p class="font-kannada text-[11px] sm:text-xs md:text-[13px] font-semibold text-royal-green tracking-wide whitespace-nowrap">
+          ॥ ಶ್ರೀ ಹೊನ್ನಾರುತಮ್ಮ ಕೃಪೆ ॥ 🙏
+        </p>
       </div>
 
       <!-- Divider flourish -->
@@ -223,7 +229,7 @@
 
       <!-- Editorial Subtitle (English & Kannada) -->
       <div class="hero-anim-sub space-y-0.5 mb-1">
-        <p class="text-[9px] sm:text-[11px] uppercase tracking-[0.25em] text-black/75 font-sans font-semibold">
+        <p class="text-[9.5px] sm:text-[11px] uppercase tracking-[0.25em] text-black/75 font-sans font-semibold">
           💐 WEDDING INVITATION 💐
         </p>
         <p class="text-[11px] sm:text-xs font-kannada font-semibold text-royal-gold">
@@ -392,9 +398,9 @@
     </div>
   </section>
 
-  <!-- SACRED GALLERY SECTION (photo1, photo2, photo3) -->
-  <section id="gallery" class="py-16 sm:py-20 px-4 sm:px-8 bg-[#FAF9F6] relative z-10 border-b border-[#E5E5EA]">
-    <div class="max-w-4xl mx-auto space-y-8 text-center">
+  <!-- SACRED GALLERY SLIDER / CAROUSEL SECTION (SINGLE UNIFIED SLIDE SYSTEM) -->
+  <section id="gallery" class="py-16 sm:py-20 px-4 sm:px-8 bg-[#FAF9F6] relative z-10 border-b border-[#E5E5EA] overflow-hidden">
+    <div class="max-w-2xl mx-auto space-y-6 text-center">
       
       <div class="space-y-1.5 scroll-reveal">
         <span class="font-sans text-[10px] tracking-[0.3em] text-[#C5A059] font-bold block uppercase">SACRED GALLERY</span>
@@ -403,42 +409,57 @@
         <div class="w-12 h-[1px] bg-royal-gold/45 mx-auto mt-2"></div>
       </div>
 
-      <!-- 3 Gallery Cards Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-4xl mx-auto scroll-reveal">
+      <!-- Single Carousel Slide Container -->
+      <div class="relative max-w-md mx-auto scroll-reveal">
         
-        <!-- Photo 1 -->
-        <div onclick="openLightbox('assets/photo1.jpg', 'Divine Union • ಪಾವನ ದೈವಿಕ ಸಾನ್ನಿಧ್ಯ')"
-             class="group relative rounded-2xl overflow-hidden border border-royal-gold/30 bg-white shadow-luxury cursor-pointer transition-all duration-300 hover:border-royal-gold hover:shadow-xl hover:-translate-y-1">
-          <div class="aspect-[3/4] w-full overflow-hidden bg-black/5">
-            <img src="assets/photo1.jpg" alt="Divine Union" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+        <!-- Main Card Frame -->
+        <div class="relative rounded-3xl overflow-hidden border-2 border-royal-gold/40 bg-white shadow-[0_16px_40px_rgba(197,160,89,0.15)] group">
+          
+          <div class="absolute inset-2 rounded-[22px] border border-royal-gold/20 pointer-events-none z-10"></div>
+
+          <!-- Slide Image Container (Click opens lightbox) -->
+          <div onclick="openCurrentSlideLightbox()" class="relative aspect-[3/4] w-full overflow-hidden cursor-pointer bg-neutral-900 flex items-center justify-center">
+            <img id="gallery-slide-img" 
+                 src="assets/photo1.jpg" 
+                 alt="Gallery Photo" 
+                 class="w-full h-full object-cover transition-all duration-700 ease-out transform group-hover:scale-105" />
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/20 pointer-events-none"></div>
+
+            <!-- Slide Tag & Caption inside image at bottom -->
+            <div class="absolute bottom-4 inset-x-4 text-center z-20 space-y-1">
+              <span id="gallery-slide-badge" class="px-3 py-1 rounded-full text-[9px] font-sans font-bold uppercase tracking-widest bg-royal-gold text-white shadow-sm inline-block">
+                DIVINE BLESSING
+              </span>
+              <h3 id="gallery-slide-title" class="font-serif text-lg sm:text-xl text-white font-medium drop-shadow">
+                Sacred Union
+              </h3>
+              <p id="gallery-slide-kannada" class="font-kannada text-xs sm:text-sm text-amber-200 drop-shadow">
+                ಪಾವನ ದೈವಿಕ ಸಾನ್ನಿಧ್ಯ
+              </p>
+            </div>
           </div>
-          <div class="p-3.5 text-center bg-white/95 border-t border-gray-100">
-            <span class="font-sans text-[8.5px] uppercase tracking-wider text-royal-gold font-bold block">DIVINE BLESSING</span>
-            <span class="font-serif text-sm text-black font-medium">Sacred Union</span>
-          </div>
+
+          <!-- Left Navigation Arrow Button -->
+          <button onclick="prevGallerySlide(event)" aria-label="Previous Slide"
+                  class="absolute left-3.5 top-1/2 -translate-y-1/2 z-30 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/90 hover:bg-white text-royal-gold border border-royal-gold/30 shadow-md flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95">
+            <i data-lucide="chevron-left" class="w-5 h-5"></i>
+          </button>
+
+          <!-- Right Navigation Arrow Button -->
+          <button onclick="nextGallerySlide(event)" aria-label="Next Slide"
+                  class="absolute right-3.5 top-1/2 -translate-y-1/2 z-30 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/90 hover:bg-white text-royal-gold border border-royal-gold/30 shadow-md flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95">
+            <i data-lucide="chevron-right" class="w-5 h-5"></i>
+          </button>
+
         </div>
 
-        <!-- Photo 2 -->
-        <div onclick="openLightbox('assets/photo2.jpg', 'Lord Shiva & Goddess Parvati Darshan • ಶಿವ-ಪಾರ್ವತಿ ಕೃಪೆ')"
-             class="group relative rounded-2xl overflow-hidden border border-royal-gold/30 bg-white shadow-luxury cursor-pointer transition-all duration-300 hover:border-royal-gold hover:shadow-xl hover:-translate-y-1">
-          <div class="aspect-[3/4] w-full overflow-hidden bg-black/5">
-            <img src="assets/photo2.jpg" alt="Shiva Parvati Darshan" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-          </div>
-          <div class="p-3.5 text-center bg-white/95 border-t border-gray-100">
-            <span class="font-sans text-[8.5px] uppercase tracking-wider text-royal-gold font-bold block">SACRED DARSHAN</span>
-            <span class="font-serif text-sm text-black font-medium">Eternal Grace</span>
-          </div>
-        </div>
-
-        <!-- Photo 3 -->
-        <div onclick="openLightbox('assets/photo3.jpg', 'HM Royal Monogram • ಶುಭ ಚಿಹ್ನೆ')"
-             class="group relative rounded-2xl overflow-hidden border border-royal-gold/30 bg-white shadow-luxury cursor-pointer transition-all duration-300 hover:border-royal-gold hover:shadow-xl hover:-translate-y-1">
-          <div class="aspect-[3/4] w-full overflow-hidden bg-black/5">
-            <img src="assets/photo3.jpg" alt="HM Royal Monogram" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-          </div>
-          <div class="p-3.5 text-center bg-white/95 border-t border-gray-100">
-            <span class="font-sans text-[8.5px] uppercase tracking-wider text-royal-gold font-bold block">ROYAL MONOGRAM</span>
-            <span class="font-serif text-sm text-black font-medium">Harshitha &bull; Manohar</span>
+        <!-- Carousel Slide Dots & Counter -->
+        <div class="flex items-center justify-center gap-2 pt-4">
+          <div id="gallery-slide-dots" class="flex items-center gap-2">
+            <button onclick="goToSlide(0)" class="slide-dot w-7 h-2 rounded-full bg-royal-gold transition-all duration-300"></button>
+            <button onclick="goToSlide(1)" class="slide-dot w-2 h-2 rounded-full bg-gray-300 hover:bg-royal-gold/60 transition-all duration-300"></button>
+            <button onclick="goToSlide(2)" class="slide-dot w-2 h-2 rounded-full bg-gray-300 hover:bg-royal-gold/60 transition-all duration-300"></button>
           </div>
         </div>
 
@@ -447,7 +468,7 @@
     </div>
   </section>
 
-  <!-- ROYAL HOSTS, FAMILY BLESSINGS & PARENTS (WITH family.png) -->
+  <!-- ROYAL HOSTS, FAMILY BLESSINGS & PARENTS (CENTER-ALIGNED & RED HEARTS) -->
   <section id="hosts" class="py-20 px-4 sm:px-8 bg-white text-charcoal relative z-10 border-b border-[#E5E5EA] overflow-hidden">
     <picture>
       <source srcset="assets/flower.webp" type="image/webp" />
@@ -479,7 +500,7 @@
         <div class="absolute inset-2 rounded-[22px] border border-royal-gold/15 pointer-events-none"></div>
 
         <!-- Welcoming Note (English & Kannada Pair) -->
-        <div class="space-y-2 max-w-2xl mx-auto relative z-10">
+        <div class="space-y-2 max-w-2xl mx-auto relative z-10 text-center">
           <p class="font-serif italic text-sm sm:text-base text-black/85 leading-relaxed">
             &ldquo;With the blessings of our elders and the grace of the Almighty, we cordially invite you to join us on this auspicious occasion and bless the couple as they begin their beautiful journey of togetherness.&rdquo;
           </p>
@@ -490,8 +511,8 @@
 
         <div class="w-20 h-[1px] bg-royal-gold/25 mx-auto"></div>
 
-        <!-- Two Column Grid: Family Photo + Bride & Groom Parents Details -->
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center relative z-10 text-left">
+        <!-- Two Column Grid: Family Photo + Center-Aligned Bride & Groom Parents Details -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center relative z-10">
           
           <!-- Family Photo Column (Left side) -->
           <div class="md:col-span-5 flex flex-col items-center">
@@ -505,13 +526,13 @@
             </span>
           </div>
 
-          <!-- Parents Details Column (Right side) -->
-          <div class="md:col-span-7 space-y-4">
+          <!-- Parents Details Column (Right side - Center Aligned) -->
+          <div class="md:col-span-7 space-y-4 text-center">
             
-            <!-- Bride's Parents -->
-            <div class="p-4 rounded-xl bg-white border border-royal-gold/20 shadow-sm space-y-1">
-              <span class="font-sans text-[8px] uppercase tracking-[0.2em] text-royal-gold font-bold block">THE BRIDE'S PARENTS • ವಧುವಿನ ಪೋಷಕರು</span>
-              <div class="font-serif text-base sm:text-lg text-black font-semibold">
+            <!-- Bride's Parents (Centered) -->
+            <div class="p-4 rounded-xl bg-white border border-royal-gold/20 shadow-sm space-y-1.5 text-center">
+              <span class="font-sans text-[8.5px] uppercase tracking-[0.2em] text-royal-gold font-bold block">THE BRIDE'S PARENTS • ವಧುವಿನ ಪೋಷಕರು</span>
+              <div class="font-serif text-lg text-black font-semibold">
                 Chi. Sou. Harshitha M.K.
               </div>
               <div class="font-sans text-xs text-charcoal-muted leading-relaxed">
@@ -522,10 +543,10 @@
               </div>
             </div>
 
-            <!-- Groom's Parents -->
-            <div class="p-4 rounded-xl bg-white border border-royal-gold/20 shadow-sm space-y-1">
-              <span class="font-sans text-[8px] uppercase tracking-[0.2em] text-royal-gold font-bold block">THE GROOM'S PARENTS • ವರನ ಪೋಷಕರು</span>
-              <div class="font-serif text-base sm:text-lg text-black font-semibold">
+            <!-- Groom's Parents (Centered) -->
+            <div class="p-4 rounded-xl bg-white border border-royal-gold/20 shadow-sm space-y-1.5 text-center">
+              <span class="font-sans text-[8.5px] uppercase tracking-[0.2em] text-royal-gold font-bold block">THE GROOM'S PARENTS • ವರನ ಪೋಷಕರು</span>
+              <div class="font-serif text-lg text-black font-semibold">
                 Chi. Rau. Manohar M.
               </div>
               <div class="font-sans text-xs text-charcoal-muted leading-relaxed">
@@ -540,27 +561,27 @@
 
         </div>
 
-        <!-- Welcomed By & Family Blessing -->
+        <!-- Welcomed By & Family Blessing with RED HEARTS -->
         <div class="pt-4 border-t border-gray-100 space-y-2 relative z-10 text-center">
           <span class="font-sans text-[9px] uppercase tracking-[0.2em] text-royal-gold font-bold block">
             INVITED &amp; WELCOMED BY
           </span>
           <div class="font-serif text-base sm:text-lg text-black font-light">
-            💜 With best wishes and blessings,
+            ❤️ With best wishes and blessings,
           </div>
           <div class="font-serif text-base sm:text-lg text-royal-green font-medium">
             All Family Members and Relatives
           </div>
           <p class="font-kannada text-sm text-royal-green font-semibold">
-            💜 ಶುಭ ಹಾರೈಕೆಗಳು ಹಾಗೂ ಆಶೀರ್ವಾದಗಳೊಂದಿಗೆ, ಕುಟುಂಬದ ಎಲ್ಲಾ ಸದಸ್ಯರು ಹಾಗೂ ಬಂಧುಬಳಗದವರು.
+            ❤️ ಶುಭ ಹಾರೈಕೆಗಳು ಹಾಗೂ ಆಶೀರ್ವಾದಗಳೊಂದಿಗೆ, ಕುಟುಂಬದ ಎಲ್ಲಾ ಸದಸ್ಯರು ಹಾಗೂ ಬಂಧುಬಳಗದವರು.
           </p>
 
           <div class="pt-3 border-t border-gray-100">
             <p class="font-serif italic text-xs sm:text-sm text-royal-gold font-medium max-w-md mx-auto">
-              💜 Two hearts, one soul, United by love and affection, Beginning a beautiful journey together, forever. 💜
+              ❤️ Two hearts, one soul, United by love and affection, Beginning a beautiful journey together, forever. ❤️
             </p>
             <p class="font-kannada text-xs text-charcoal-muted pt-1 max-w-md mx-auto">
-              💜 ಎರಡು ಹೃದಯಗಳು, ಒಂದೇ ಆತ್ಮ, ಪ್ರೀತಿ ಮತ್ತು ಅನುರಾಗದಿಂದ ಕೂಡಿದ ಎಂದೆಂದಿಗೂ ಸುಂದರವಾದ ಪಯಣ. 💜
+              ❤️ ಎರಡು ಹೃದಯಗಳು, ಒಂದೇ ಆತ್ಮ, ಪ್ರೀತಿ ಮತ್ತು ಅನುರಾಗದಿಂದ ಕೂಡಿದ ಎಂದೆಂದಿಗೂ ಸುಂದರವಾದ ಪಯಣ. ❤️
             </p>
           </div>
         </div>
@@ -658,6 +679,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=9.0"></script>
+  <script src="script.js?v=10.0"></script>
 </body>
 </html>

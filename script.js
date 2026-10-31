@@ -736,3 +736,104 @@ function closeLightbox() {
 
 window.openLightbox = openLightbox;
 window.closeLightbox = closeLightbox;
+
+// SACRED GALLERY SINGLE LUXURY SLIDER SYSTEM
+const gallerySlidesData = [
+  {
+    img: 'assets/photo1.jpg',
+    badge: 'DIVINE BLESSING',
+    title: 'Sacred Union',
+    kan: 'ಪಾವನ ದೈವಿಕ ಸಾನ್ನಿಧ್ಯ'
+  },
+  {
+    img: 'assets/photo2.jpg',
+    badge: 'ROYAL MOMENT',
+    title: 'Together in Harmony',
+    kan: 'ಸಂತಸದ ಶುಭ ಕ್ಷಣಗಳು'
+  },
+  {
+    img: 'assets/photo3.jpg',
+    badge: 'FOREVER JOURNEY',
+    title: 'Blessed Beginnings',
+    kan: 'ನವ ಜೀವನದ ಶುಭಾರಂಭ'
+  }
+];
+
+let currentGalleryIdx = 0;
+let galleryAutoSlideInterval = null;
+
+function renderGallerySlide(idx) {
+  if (idx < 0) idx = gallerySlidesData.length - 1;
+  if (idx >= gallerySlidesData.length) idx = 0;
+  currentGalleryIdx = idx;
+
+  const data = gallerySlidesData[currentGalleryIdx];
+  const imgEl = document.getElementById('gallery-slide-img');
+  const badgeEl = document.getElementById('gallery-slide-badge');
+  const titleEl = document.getElementById('gallery-slide-title');
+  const kanEl = document.getElementById('gallery-slide-kannada');
+  const dots = document.querySelectorAll('.slide-dot');
+
+  if (imgEl) {
+    imgEl.style.opacity = '0.3';
+    setTimeout(() => {
+      imgEl.src = data.img;
+      imgEl.style.opacity = '1';
+    }, 200);
+  }
+
+  if (badgeEl) badgeEl.textContent = data.badge;
+  if (titleEl) titleEl.textContent = data.title;
+  if (kanEl) kanEl.textContent = data.kan;
+
+  if (dots && dots.length > 0) {
+    dots.forEach((dot, dIdx) => {
+      if (dIdx === currentGalleryIdx) {
+        dot.className = 'slide-dot w-7 h-2 rounded-full bg-royal-gold transition-all duration-300';
+      } else {
+        dot.className = 'slide-dot w-2 h-2 rounded-full bg-gray-300 hover:bg-royal-gold/60 transition-all duration-300';
+      }
+    });
+  }
+}
+
+function nextGallerySlide(e) {
+  if (e) e.stopPropagation();
+  renderGallerySlide(currentGalleryIdx + 1);
+  resetGalleryAutoSlide();
+}
+
+function prevGallerySlide(e) {
+  if (e) e.stopPropagation();
+  renderGallerySlide(currentGalleryIdx - 1);
+  resetGalleryAutoSlide();
+}
+
+function goToSlide(idx) {
+  renderGallerySlide(idx);
+  resetGalleryAutoSlide();
+}
+
+function openCurrentSlideLightbox() {
+  const current = gallerySlidesData[currentGalleryIdx];
+  if (current) {
+    openLightbox(current.img, `${current.title} • ${current.kan}`);
+  }
+}
+
+function resetGalleryAutoSlide() {
+  if (galleryAutoSlideInterval) clearInterval(galleryAutoSlideInterval);
+  galleryAutoSlideInterval = setInterval(() => {
+    renderGallerySlide(currentGalleryIdx + 1);
+  }, 4500);
+}
+
+// Start auto-slide on load
+if (document.getElementById('gallery-slide-img')) {
+  resetGalleryAutoSlide();
+}
+
+window.nextGallerySlide = nextGallerySlide;
+window.prevGallerySlide = prevGallerySlide;
+window.goToSlide = goToSlide;
+window.openCurrentSlideLightbox = openCurrentSlideLightbox;
